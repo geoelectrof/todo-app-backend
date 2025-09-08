@@ -1,7 +1,16 @@
 import express from "express";
+import { AppDataSource } from "./data-source";
 
 const app = express();
 const port = 3000;
+
+AppDataSource.initialize()
+    .then(() => {
+        console.log("Data Source has been initialized!");
+    })
+    .catch((error) => {
+        console.error("Error during Data Source initialization", error);
+    });
 
 app.get("/", (req, res) => {
     res.send("Hello New World");
